@@ -1,6 +1,10 @@
+import checkComplete from "./components/checkComplete.js";
+import deleteIcon from "./components/deleteIcon.js";
+
 //Se utilizan los data atributes para dar una referencia mas concreta y evitar que con la refactorización del código se pierdan los atributos
 
 //Immediately invoked function expression (IIFE)
+//Para evitar que se pueda acceder a las funciones 
 (() => {
     const btn = document.querySelector("[data-form-btn]");
 
@@ -24,33 +28,15 @@
         titleTask.innerText = value;
         //Añadiendo todo a la tarjeta
         taskContent.appendChild(titleTask);
-        const content = `
-    <i class="fas fa-trash-alt trashIcon icon"></i>`;
 
         //task.innerHTML = content;
         task.appendChild(taskContent);
+        task.appendChild(deleteIcon());
         //Union de padre e hijo para agregar las cards de manera dinamica
         list.appendChild(task);
-    }
+    };
 
     //Se reciben 2 parámetros, el tipo de evento que se quiere escuchar y la acción a realizar
     btn.addEventListener("click", createTask);
-
-    //Creación Icono
-    const checkComplete = () => {
-        const i = document.createElement("i");
-        i.classList.add("far", "fa-check-square", "icon");
-        i.addEventListener("click", completeTask);
-        return i;
-    }
-
-
-    const completeTask = (event) => {
-        const element = event.target;
-        //toggle se usa para checar si una clase ya está definida y la puede cambiar, agregar o remover si es necesario
-        element.classList.toggle("fas");
-        element.classList.toggle("completeIcon");
-        element.classList.toggle("far");
-    }
 
 })();
